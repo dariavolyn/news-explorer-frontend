@@ -1,23 +1,124 @@
 .main {
+    height: 576px;
     padding: 0;
     margin: 0;
+    position: relative;
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
+    background-image: url('../../images/main-background-phone.jpeg');
+    background-size: auto;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
-.main-background-image {
-    width: 100%;
-    max-height: 576px;
-    filter: brightness(75%);
-    object-fit: none;
-    z-index: -1;
-    padding: 0;
+.main-container {
+    z-index: 5;
+    position: relative;
+}
+
+.main-title {
+    font-family: 'Roboto Slab';
+    font-weight: 700;
+    font-size: 60px;
+    line-height: 107%;
+    margin: 0 auto;
+    max-width: 608px;
+}
+
+.main-title-container {
+    color: white;
+}
+
+.main-search {
+    width: 608px;
+    height: 64px;
+    max-width: 608px;
     margin: 0;
+    padding: 88px 0 0 0;
+}
+
+.main-search-bar {
+    position: absolute;
+    height: 64px;
+    width: 550px;
+    left: 0;
+    font-weight: normal;
+    color: black;
+    background-color: white;
+    margin: 0;
+    padding: 0 0 0 24px;
+    border-radius: 100px 0 0 100px;
+    border: none;
+    outline: none;
+}
+
+.main-search-submit {
+    right: 0;
+    position: absolute;
+    color: white;
+    height: 64px;
+    width: 168px;
+    background-color: #2F71E5;
+    border-radius: 100px;
+    z-index: 3;
+}
+
+.main-subtitle {
+    max-width: 608px;
+    margin: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 18px;
+    line-height: 24px;
+}
+
+.main::before {
+    content: "";
+    background-color: black;
+    opacity: 25%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.main-search-bar::placeholder {
+    color: #B6BCBF;
 }
 
 @media screen and (min-width: 330px) and (max-width: 720px) {
     .main {
         height: 536px;
     }
-   
+    .main-container {
+        max-width: 288px;
+    }
+    .main-title {
+        font-weight: 400;
+        font-size: 36px;
+        line-height: 40px;
+        padding-bottom: 16px;
+    }
+    .main-search {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .main-search-bar {
+        width: 288px;
+        height: 56px;
+        border-radius: 100px;
+        position: initial;
+    }
+    .main-search-submit {
+        width: 100%;
+        height: 56px;
+        bottom: 0;
+        margin-top: 16px;
+        position: initial;
+    }
 }
