@@ -1,4 +1,6 @@
-.main {
+/* intro page */
+
+.intro {
     height: 576px;
     padding: 0;
     margin: auto;
@@ -13,12 +15,12 @@
     background-position: center;
 }
 
-.main-container {
+.intro-container {
     z-index: 5;
     position: relative;
 }
 
-.main-title {
+.intro-title {
     font-family: 'Roboto Slab';
     font-weight: 700;
     font-size: 60px;
@@ -27,11 +29,11 @@
     max-width: 608px;
 }
 
-.main-title-container {
+.intro-title-container {
     color: white;
 }
 
-.main-subtitle {
+.intro-subtitle {
     max-width: 608px;
     padding: 0;
     margin: auto;
@@ -41,7 +43,7 @@
     line-height: 24px;
 }
 
-.main::before {
+.intro::before {
     content: "";
     background-color: black;
     opacity: 25%;
@@ -53,33 +55,96 @@
     z-index: 1;
 }
 
-.main-page {
+.intro-page {
     height: 100%;
 }
 
+/* about page */
+
+.main-about {
+    height: 100%;
+    background-color: white;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    margin: 0;
+    padding: 80px 0 0 0;
+}
+
+.main-about-text {
+    max-width: 600px;
+    margin: 0;
+    padding: 0 0 0 46px;
+}
+
+.main-about-title {
+    font-family: Roboto Slab;
+    font-size: 40px;
+    line-height: 46px;
+    font-weight: 400;
+    font-style: normal;
+    margin: 0;
+    padding: 0 0 24px 0;
+}
+
+.main-about-info {
+    font-size: 18px;
+    line-height: 24px;
+    font-weight: 400;
+    font-style: normal;
+    margin: 0;
+    padding: 0 0 24px 0;
+}
+
+.main-about-picture {
+    width: 464px;
+    height: 464px;
+    border-radius: 1000px;
+    margin: 0 0 80px 0;
+    padding: 0;
+}
+
 @media screen and (min-width: 720px) and (max-width: 1040px) {
-    .main {
+    .intro {
         height: 400px;
     }
-    .main-container {
+    .intro-container {
         max-width: 452px;
         margin: 0 auto;
     }
-    .main-title {
+    .intro-title {
         font-weight: 400;
         font-size: 36px;
         line-height: 40px;
         padding-bottom: 16px;
     }
+    .main-about {
+        height: 100%;
+        padding-top: 60px;
+    }
+    .main-about-picture {
+        width: 232px;
+        height: 232px;
+        margin-bottom: 60px;
+    }
+    .main-about-title {
+        font-size: 30px;
+        line-height: 40px;
+        padding-bottom: 16px;
+    }
+    .main-about-info {
+        padding-bottom: 16px;
+    }
 }
 
 @media screen and (min-width: 320px) and (max-width: 719px) {
-    .main {
+    .intro {
         height: 536px;
         width: 100%;
         margin: 0 auto;
     }
-    .main-container {
+    .intro-container {
         max-width: 90%;
         margin: 0 auto;
         display: flex;
@@ -87,16 +152,37 @@
         align-content: center;
         justify-content: center;
     }
-    .main-title-container {
+    .intro-title-container {
         max-width: 90%;
         margin: 0 auto;
         padding-top: 30px;
     }
-    .main-title {
+    .intro-title {
         font-weight: 400;
         font-style: normal;
         font-size: 36px;
         line-height: 40px;
+        padding-bottom: 16px;
+    }
+    .main-about {
+        height: 100%;
+        padding: 24px 0 24px 0;
+    }
+    .main-about-picture {
+        width: 260px;
+        height: 260px;
+        margin-bottom: 24px;
+    }
+    .main-about-text {
+        padding-left: 0;
+        margin: 0 16px;
+    }
+    .main-about-title {
+        font-size: 30px;
+        line-height: 40px;
+        padding-bottom: 16px;
+    }
+    .main-about-info {
         padding-bottom: 16px;
     }
 }
