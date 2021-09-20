@@ -1,46 +1,13 @@
-/* intro page */
-
 .intro {
-    height: 576px;
+    width: 100%;
+    margin: 0;
     padding: 0;
-    margin: auto;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-content: center;
     background-image: url('../../images/main-background-phone.jpeg');
-    background-size: auto;
     background-repeat: no-repeat;
     background-position: center;
-}
-
-.intro-container {
-    z-index: 5;
+    background-size: cover;
+    height: 576px;
     position: relative;
-}
-
-.intro-title {
-    font-family: 'Roboto Slab';
-    font-weight: 700;
-    font-size: 60px;
-    line-height: 107%;
-    margin: 0 auto;
-    max-width: 608px;
-}
-
-.intro-title-container {
-    color: white;
-}
-
-.intro-subtitle {
-    max-width: 608px;
-    padding: 0;
-    margin: auto;
-    font-weight: 400;
-    font-style: normal;
-    font-size: 18px;
-    line-height: 24px;
 }
 
 .intro::before {
@@ -52,88 +19,55 @@
     left: 0;
     width: 100%;
     height: 100%;
+    z-index: 0;
+}
+
+.intro__text {
+    height: 100%;
+    max-width: 608px;
+    color: white;
+    margin: 0 auto;
+    padding: 0;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.intro__title {
+    font-family: 'Roboto Slab';
+    font-size: 60px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 64px;
+    margin: 0;
+    padding: 0;
     z-index: 1;
 }
 
-.intro-page {
-    height: 100%;
-}
-
-/* about page */
-
-.main-about {
-    height: 100%;
-    background-color: white;
-    display: flex;
-    flex-wrap: wrap;
-    align-content: center;
-    justify-content: center;
-    margin: 0;
-    padding: 80px 0 0 0;
-}
-
-.main-about-text {
-    max-width: 600px;
-    margin: 0;
-    padding: 0 0 0 46px;
-}
-
-.main-about-title {
-    font-family: Roboto Slab;
-    font-size: 40px;
-    line-height: 46px;
-    font-weight: 400;
-    font-style: normal;
-    margin: 0;
-    padding: 0 0 24px 0;
-}
-
-.main-about-info {
+.intro__subtitle {
+    font-family: 'Roboto';
     font-size: 18px;
-    line-height: 24px;
-    font-weight: 400;
     font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
     margin: 0;
-    padding: 0 0 24px 0;
-}
-
-.main-about-picture {
-    width: 464px;
-    height: 464px;
-    border-radius: 1000px;
-    margin: 0 0 80px 0;
     padding: 0;
+    z-index: 1;
 }
 
 @media screen and (min-width: 720px) and (max-width: 1040px) {
     .intro {
         height: 400px;
     }
-    .intro-container {
+    .intro__text {
         max-width: 452px;
         margin: 0 auto;
     }
-    .intro-title {
+    .intro__title {
         font-weight: 400;
         font-size: 36px;
         line-height: 40px;
-        padding-bottom: 16px;
-    }
-    .main-about {
-        height: 100%;
-        padding-top: 60px;
-    }
-    .main-about-picture {
-        width: 232px;
-        height: 232px;
-        margin-bottom: 60px;
-    }
-    .main-about-title {
-        font-size: 30px;
-        line-height: 40px;
-        padding-bottom: 16px;
-    }
-    .main-about-info {
         padding-bottom: 16px;
     }
 }
@@ -141,10 +75,9 @@
 @media screen and (min-width: 320px) and (max-width: 719px) {
     .intro {
         height: 536px;
-        width: 100%;
         margin: 0 auto;
     }
-    .intro-container {
+    .intro__text {
         max-width: 90%;
         margin: 0 auto;
         display: flex;
@@ -152,37 +85,14 @@
         align-content: center;
         justify-content: center;
     }
-    .intro-title-container {
+    .intro__title {
         max-width: 90%;
-        margin: 0 auto;
+        margin: 0;
         padding-top: 30px;
-    }
-    .intro-title {
         font-weight: 400;
         font-style: normal;
         font-size: 36px;
         line-height: 40px;
-        padding-bottom: 16px;
-    }
-    .main-about {
-        height: 100%;
-        padding: 24px 0 24px 0;
-    }
-    .main-about-picture {
-        width: 260px;
-        height: 260px;
-        margin-bottom: 24px;
-    }
-    .main-about-text {
-        padding-left: 0;
-        margin: 0 16px;
-    }
-    .main-about-title {
-        font-size: 30px;
-        line-height: 40px;
-        padding-bottom: 16px;
-    }
-    .main-about-info {
         padding-bottom: 16px;
     }
 }

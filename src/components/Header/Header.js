@@ -1,17 +1,19 @@
 import React from 'react';
-import menuIconPath from '../../images/menu.svg';
+import Navigation from '../Navigation/Navigation';
 
-function Header() {
+
+function Header(props) {
     return (
-        <div className="header">
-            <h2 className="header-logo">NewsExplorer</h2>
-            <button className="button header-mobile-menu">
-                    <img src={menuIconPath} alt="Menu icon"></img>
-                </button>
-            <nav className="header-menu">
-                <button className="button header-button-home">Home</button>
-                <button className="button header-button-signin">Sign in</button>
-            </nav>
+        <div className={`header header_${props.type}`}>
+            <h2 className={`header__logo header__logo_${props.type}`}>NewsExplorer</h2>
+            <button className={`button header__nav-mobile-button header__nav-mobile-button_${props.type}`} onClick={props.onOpen}></button>
+            <Navigation
+                user={props.user}
+                type={props.type}
+                isNavMobileOpen={props.isNavMobileOpen}
+                onAuth={props.onAuth}
+                onClose={props.onClose}
+            />
         </div>
     )
 }

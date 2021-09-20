@@ -1,4 +1,4 @@
-.news-card {
+.news__card {
     margin: 0 auto;
     padding: 0;
     border-radius: 20px;
@@ -11,13 +11,13 @@
     align-self: center;
 }
 
-.news-card-content {
+.news__card-content {
     width: calc(100% - 48px);
     margin: 0 auto;
     padding: 20px 0 24px 0;
 }
 
-.news-card-date {
+.news__card_date {
     color: #B6BCBF;
     font-family: Source Sans Pro;
     font-size: 18px;
@@ -28,17 +28,17 @@
     padding: 0 0 12px 0;
 }
 
-.news-card-title {
+.news__card_title {
     font-weight: normal;
     font-style: normal;
     font-family: Roboto Slab;
     font-size: 26px;
     line-height: 30px;
     margin: 0;
-    padding:12px 0 16px 0;
+    padding: 12px 0 16px 0;
 }
 
-.news-card-text {
+.news__card_text {
     font-weight: 400;
     font-size: 16px;
     line-height: 22px;
@@ -50,15 +50,46 @@
     white-space: normal;
 }
 
-.news-card-picture {
+.news__card_picture {
     width: 100%;
     margin: 0;
     padding: 0;
     background-size: contain;
     border-radius: 20px 20px 0 0;
+    position: relative;
 }
 
-.news-card-source {
+.news__card_picture-label {
+    width: 87px;
+    height: 24px;
+    text-align: center;
+    padding: 8px 0;
+    background-color: white;
+    border-radius: 10px;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px;
+    position: absolute;
+    top: 24px;
+    left: 24px;
+}
+
+.news__card_picture-delete {
+    width: 40px;
+    height: 40px;
+    background-color: white;
+    background-image: url('../../images/trash.svg');
+    background-size: 24px 24px;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    border-radius: 10px;
+}
+
+.news__card_source {
     color: #B6BCBF;
     font-family: Roboto Slab;
     font-size: 16px;
@@ -71,20 +102,20 @@
 }
 
 @media screen and (max-width: 1024px) {
-    .news-card-content {
+    .news__card_content {
         width: calc(100% - 32px);
         padding-top: 16px;
     }
-    .news-card-date {
+    .news__card_date {
         padding-bottom: 12px;
     }
-    .news-card-title {
+    .news__card_title {
         font-style: normal;
         font-size: 22px;
         line-height: 24px;
         padding-bottom: 10px;
     }
-    .news-card-text {
+    .news__card_text {
         height: 88px;
     }
 }

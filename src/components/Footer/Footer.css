@@ -1,0 +1,109 @@
+.footer {
+    height: 80px;
+    margin: 0 auto;
+    padding: 0;
+    display: flex;
+    align-content: center;
+    justify-content: space-around;
+}
+
+.footer__copyright {
+    margin: auto 0;
+    padding: 0 20% 0 0;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 22px;
+    color: #B6BCBF;
+}
+
+.footer__links {
+    margin: auto 0;
+    padding: 0;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+}
+
+.footer__link_home {
+    margin: 0 24px 0 0;
+    padding: 0;
+}
+
+.footer__link_practicum {
+    margin: 0 24px 0 0;
+    padding: 0;
+}
+
+.footer__link_github {
+    margin: 0 24px 0 0;
+    padding: 0;
+    height: 24px;
+    width: 24px;
+}
+
+.footer__link_fb {
+    margin: 0 24px 0 0;
+    padding: 0;
+    height: 24px;
+    width: 24px;
+}
+
+@media screen and (min-width: 720px) and (max-width: 1040px) {
+    .footer {
+        background-color: white;
+    }
+    .footer__copyright {
+        padding-left: 5%;
+    }
+}
+
+@media screen and (min-width: 320px) and (max-width: 719px) {
+    .footer {
+        height: 100%;
+        padding-top: 20px;
+        background-color: white;
+        flex-direction: column-reverse;
+        flex-wrap: wrap;
+        align-content: center;
+        justify-content: center;
+    }
+    .footer__copyright {
+        padding: 0;
+        margin: 0 auto;
+    }
+    .footer__links {
+        width: 100%;
+        margin: 0;
+        padding-bottom: 38px;
+        display: grid;
+        justify-content: space-around;
+        align-content: space-between;
+        grid-row-gap: 20px;
+        grid-column-gap: 24px;
+        grid-template-areas: "home github fb" "practicum practicum practicum"
+    }
+    .footer__link_home {
+        margin-left: 0;
+        grid-area: home;
+        grid-column-start: 1;
+        grid-column-end: 6;
+    }
+    .footer__link_practicum {
+        margin: 0;
+        grid-area: practicum;
+    }
+    .footer__link_github {
+        margin: 0;
+        grid-area: github;
+        grid-column-start: 4;
+        grid-column-end: 5;
+    }
+    .footer__link_fb {
+        margin: 0;
+        grid-area: fb;
+        grid-column-start: 5;
+        grid-column-end: 6;
+    }
+}
