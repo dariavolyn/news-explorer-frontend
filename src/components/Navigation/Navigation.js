@@ -2,7 +2,6 @@ import React from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
 
 function Navigation(props) {
-    const lightType = 'light';
     const history = useHistory();
 
     function signOut() {
@@ -11,22 +10,18 @@ function Navigation(props) {
 
     return (
 
-        <nav className='navigation'>
-            <div className={`navigation_full navigation_full_${props.type}`}>
-                <NavLink to='/' className={`link navigation__home navigation__home_${props.type}`}>Home</NavLink>
-                { lightType === props.type && <button className='button navigation__saved-articles'>Saved articles</button>}
-                { lightType === props.type
+        <nav className={`navigation navigation__page_${props.page} ${props.isNavMobileOpen ? 'navigation_is_open' : 'navigation_is_hidden'}`}>
+            <div className={`navigation__menu navigation__menu_page_${props.page} ${props.isNavMobileOpen ? 'navigation__menu_is_open' : ''}`}>
+                <button className={`button navigation__close navigation__close_page_${props.page}`} onClick={props.onClose}>+</button>
+                <NavLink to='/' className={`link navigation__home navigation__home_page_${props.page}`}
+                    exact activeClassName='navigation__home_active'>Home</NavLink>
+                {props.page === 'saved-news' && <NavLink to='/saved-news'
+                    className='button navigation__saved-articles'
+                    exact activeClassName='navigation__saved-articles_active'>Saved articles</NavLink>}
+                {props.page === 'saved-news'
                     ? <button className='button navigation__exit' onClick={signOut}>{props.user}</button>
-                    : <button className={`button navigation__signin navigation__signin_${props.type}`} onClick={props.onAuth}>Sign in</button>
+                    : <button className='button navigation__signin' onClick={props.onAuth}>Sign in</button>
                 }
-            </div>
-
-            <div className={`navigation_mobile ${props.isNavMobileOpen ? 'navigation_mobile_is_open' : ''}`}>
-                <button className="button navigation__close_mobile" onClick={props.onClose}></button>
-                <div className="navigation_mobile-container">
-                    <NavLink to='/' className="link navigation__home_mobile">Home</NavLink>
-                    <button className="button navigation__signin_mobile" onClick={props.onAuth}>Sign in</button>
-                </div>
             </div>
         </nav>
 

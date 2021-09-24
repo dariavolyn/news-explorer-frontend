@@ -1,0 +1,14 @@
+.nothing-found {
+    background-color: #F5F6F7;
+    width: 100%;
+}
+
+.nothing-found__mesage {
+    font-family: Roboto;
+    font-weight: 400;
+    font-size: 44px;
+    line-height: 44px;
+    margin: 0 auto;
+    padding: auto 0;
+    text-align: center;
+}

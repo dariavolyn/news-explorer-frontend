@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Switch, useHistory } from 'react-router-dom';
 
 import Header from '../Header/Header.js';
 import Main from '../Main/Main.js';
@@ -7,11 +7,16 @@ import Footer from '../Footer/Footer.js';
 import Register from '../Register/Register.js';
 import Authentication from '../Authentication/Authentication.js';
 import SavedNews from '../SavedNews/SavedNews.js';
+import SuccessPopup from '../SuccessPopup/SuccessPopup.js';
 
 function App(props) {
     const [isRegisterOpen, setRegisterOpen] = useState(false);
     const [isAuthOpen, setAuthOpen] = useState(false);
     const [isNavMobileOpen, setNavMobileOpen] = useState(false);
+    const [isSearchButtonClicked, setSearchButtonClicked] = useState(false);
+    const [isCardSaved, setCardSaved] = useState(false);
+    const [isSuccessPopupOpen, setSuccessPopupOpen] = useState(false);
+    const history = useHistory();
 
     useEffect(() => {
         const close = (e) => {
@@ -24,9 +29,11 @@ function App(props) {
     }, [])
 
     function handleAuthOpen() {
+        setSuccessPopupOpen(false);
         setRegisterOpen(false);
         setAuthOpen(true);
     }
+
     function handleRegisterOpen() {
         setAuthOpen(false);
         setRegisterOpen(true);
@@ -36,33 +43,73 @@ function App(props) {
         setNavMobileOpen(true);
     }
 
+    function handleSearchButtonClicked(e) {
+        e.preventDefault();
+        setSearchButtonClicked(true);
+    }
+
+    function handleSaveCard() {
+        if (setCardSaved(true)) {
+            setCardSaved(false);
+        } setCardSaved(true)
+    }
+
     function closeAllPopups() {
+        setSuccessPopupOpen(false);
         setRegisterOpen(false);
         setAuthOpen(false);
         setNavMobileOpen(false);
     }
+
+    function handleRegister(e) {
+        e.preventDefault();
+        setSuccessPopupOpen(true);
+        setRegisterOpen(false);
+    }
+
+    function handleAuth(e) {
+        e.preventDefault();
+        closeAllPopups();
+        history.push('/saved-news')
+    }
+
     return (
         <div className='app'>
-            <Route exact path='/'>
-                <Header
-                    type='main'
-                    onAuth={handleAuthOpen}
-                    isNavMobileOpen={isNavMobileOpen}
-                    onOpen={handleNavMobileOpen}
-                    onClose={closeAllPopups}
-                />
-                <Main />
-            </Route>
+            <Switch>
+                <Route exact path='/'>
+                    <Header
+                        page='main'
+                        onAuth={handleAuthOpen}
+                        isNavMobileOpen={isNavMobileOpen}
+                        onOpen={handleNavMobileOpen}
+                        onClose={closeAllPopups}
+                    />
+                    <Main
+                        page='main'
+                        isClicked={isSearchButtonClicked}
+                        onSearch={handleSearchButtonClicked}
+                        onSave={handleSaveCard}
+                        isSaved={isCardSaved}
+                    />
+                </Route>
 
-            <Route exact path='/saved-news'>
-                <SavedNews />
-            </Route>
+                <Route exact path='/saved-news'>
+                    <SavedNews
+                        page='saved-news'
+                        isNavMobileOpen={isNavMobileOpen}
+                        onOpen={handleNavMobileOpen}
+                        onClose={closeAllPopups}
+                    />
+                </Route>
+            </Switch>
 
             <Footer />
 
-            <Register isOpen={isRegisterOpen} onClose={closeAllPopups} openAltForm={handleAuthOpen} />
+            <Register isOpen={isRegisterOpen} onClose={closeAllPopups} openAltForm={handleAuthOpen} register={handleRegister} />
 
-            <Authentication isOpen={isAuthOpen} onClose={closeAllPopups} openAltForm={handleRegisterOpen} />
+            <Authentication isOpen={isAuthOpen} onClose={closeAllPopups} openAltForm={handleRegisterOpen} auth={handleAuth} />
+
+            <SuccessPopup isOpen={isSuccessPopupOpen} onClose={closeAllPopups} openAuth={handleAuthOpen} />
         </div>
     )
 }

@@ -1,19 +1,38 @@
 import React from 'react';
-import NewsCard from '../NewsCard/NewsCard.js'
+import NewsCard from '../NewsCard/NewsCard';
 
 function NewsCardList(props) {
     return (
-        <div className='news__card_list'>
-            <ul className='news__card_list-grid'>
-                <h3 className='news__card_list-title'>Search results</h3>
-                <NewsCard />
-                <NewsCard />
-                <NewsCard />
-                <NewsCard />
-                <NewsCard />
-            </ul>
-            <button className='button news__card_show-more' type='button'>Show more</button>
-        </div>
+        <section className='news-list'>
+
+            {props.page === 'main' && <h3 className='news-list__title'>Search results</h3>}
+            <NewsCard
+                page={props.page}
+                isSaved={props.isSaved}
+                onSave={props.onSave}
+            />
+            <NewsCard
+                page={props.page}
+                isSaved={props.isSaved}
+                onSave={props.onSave}
+            />
+            <NewsCard
+                page={props.page}
+                isSaved={props.isSaved}
+                onSave={props.onSave}
+            />
+            <NewsCard
+                page={props.page}
+                isSaved={props.isSaved}
+                onSave={props.onSave}
+            />
+            <NewsCard
+                page={props.page}
+                isSaved={props.isSaved}
+                onSave={props.onSave}
+            />
+            {props.page === 'main' && <button className='button news-list__show-more' type='button'>Show more</button>}
+        </section>
     )
 }
 

@@ -1,0 +1,15 @@
+.popup__container_type_success {
+    width: 430px;
+    height: 182px;
+}
+
+.popup__success-singin {
+    font-family: Inter;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 17px;
+    margin: 0;
+    padding: 14px 0 0 34px;
+    color: #2F71E5;
+}

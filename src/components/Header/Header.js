@@ -4,17 +4,20 @@ import Navigation from '../Navigation/Navigation';
 
 function Header(props) {
     return (
-        <div className={`header header_${props.type}`}>
-            <h2 className={`header__logo header__logo_${props.type}`}>NewsExplorer</h2>
-            <button className={`button header__nav-mobile-button header__nav-mobile-button_${props.type}`} onClick={props.onOpen}></button>
+        <header className={`header header__page_${props.page}`}>
+            <h2 className={`header__logo header__logo_page_${props.page}`}>NewsExplorer</h2>
+            <button 
+            className={`button header__nav-mobile-button header__nav-mobile-button_page_${props.page}`} 
+            onClick={props.onOpen}>
+            </button>
             <Navigation
                 user={props.user}
-                type={props.type}
+                page={props.page}
                 isNavMobileOpen={props.isNavMobileOpen}
                 onAuth={props.onAuth}
                 onClose={props.onClose}
             />
-        </div>
+        </header>
     )
 }
 

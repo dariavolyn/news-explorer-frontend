@@ -26,24 +26,26 @@
     line-height: 24px;
 }
 
-.footer__link_home {
+.footer__link-home {
     margin: 0 24px 0 0;
     padding: 0;
+    color: black;
 }
 
-.footer__link_practicum {
+.footer__link-practicum {
     margin: 0 24px 0 0;
     padding: 0;
+    color: black;
 }
 
-.footer__link_github {
+.footer__link-github {
     margin: 0 24px 0 0;
     padding: 0;
     height: 24px;
     width: 24px;
 }
 
-.footer__link_fb {
+.footer__link-fb {
     margin: 0 24px 0 0;
     padding: 0;
     height: 24px;
@@ -84,23 +86,23 @@
         grid-column-gap: 24px;
         grid-template-areas: "home github fb" "practicum practicum practicum"
     }
-    .footer__link_home {
+    .footer__link-home {
         margin-left: 0;
         grid-area: home;
         grid-column-start: 1;
         grid-column-end: 6;
     }
-    .footer__link_practicum {
+    .footer__link-practicum {
         margin: 0;
         grid-area: practicum;
     }
-    .footer__link_github {
+    .footer__link-github {
         margin: 0;
         grid-area: github;
         grid-column-start: 4;
         grid-column-end: 5;
     }
-    .footer__link_fb {
+    .footer__link-fb {
         margin: 0;
         grid-area: fb;
         grid-column-start: 5;

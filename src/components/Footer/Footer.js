@@ -1,20 +1,21 @@
 import React from 'react';
 import githubLogo from '../../images/github.svg';
 import fbLogo from '../../images/fb_logo.svg';
+import { NavLink } from 'react-router-dom';
 
 function Footer() {
     return (
-        <div className='footer'>
+        <footer className='footer'>
             <p className='footer__copyright'>© 2021 Supersite, Powered by News API</p>
             <nav className='footer__links'>
-                <a className='link footer__link_home' href='http://home.com'>Home</a>
-                <a className='link footer__link_practicum' href='https://practicum.yandex.com/'>Practicum by Yandex</a>
-                <a className='link footer__link_github' href='https://github.com/dariavolyn'>
+                <NavLink className='link footer__link-home' to="/">Home</NavLink>
+                <a className='link footer__link-practicum' href='https://practicum.yandex.com/' target='_blank'>Practicum by Yandex</a>
+                <a className='link footer__link-github' href='https://github.com/dariavolyn' target='_blank'>
                     <img src={githubLogo} alt='Github link' /></a>
-                <a className='link footer__link_fb' href='https://www.facebook.com/daria.volyn'>
+                <a className='link footer__link-fb' href='https://www.facebook.com/daria.volyn' target='_blank'>
                     <img src={fbLogo} alt='Facebook link' /></a>
             </nav>
-        </div>
+        </footer>
     )
 }
 

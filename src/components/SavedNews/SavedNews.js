@@ -3,15 +3,21 @@ import NewsCardList from '../NewsCardList/NewsCardList';
 import Header from '../Header/Header.js'
 import SavedNewsHeader from '../SavedNewsHeader/SavedNewsHeader';
 
-function SavedNews() {
+function SavedNews(props) {
     return (
         <div className='saved-news'>
-            <Header type='light' user='Elise' />
+            <Header 
+            page={props.page}
+            user='Elise' 
+            isNavMobileOpen={props.isNavMobileOpen}
+            onOpen={props.onOpen}
+            onClose={props.onClose}
+            />
 
             <SavedNewsHeader />
 
-            <NewsCardList />
-        </div>
+            <NewsCardList page={props.page} />
+        </div >
     )
 }
 
