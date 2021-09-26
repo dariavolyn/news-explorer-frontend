@@ -40,7 +40,7 @@
 
 .popup__input {
     width: 100%;
-    font-family: Inter;
+    font-family: 'Inter', sans-serif;
     font-size: 14px;
     font-style: normal;
     font-weight: 400;
@@ -52,8 +52,12 @@
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
 
+.popup__input:focus {
+    border-bottom: 1px solid black;
+}
+
 .popup__title {
-    font-family: Roboto;
+    font-family: 'Roboto', sans-serif;
     font-size: 24px;
     font-style: normal;
     font-weight: 900;
@@ -63,7 +67,7 @@
 }
 
 .popup__input-title {
-    font-family: Inter;
+    font-family: 'Inter', sans-serif;
     font-size: 12px;
     font-style: normal;
     font-weight: 400;
@@ -84,7 +88,7 @@
 }
 
 .popup__error {
-    font-family: Inter;
+    font-family: 'Inter', sans-serif;
     font-size: 12px;
     font-style: normal;
     font-weight: 400;
@@ -109,7 +113,7 @@
 }
 
 .popup__form-alt {
-    font-family: Inter;
+    font-family: 'Inter', sans-serif;
     font-size: 14px;
     font-style: normal;
     font-weight: 400;

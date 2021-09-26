@@ -4,11 +4,11 @@
     height: 48px;
 }
 
-.navigation__page_main {
+.navigation_page_main {
     color: white;
 }
 
-.navigation__page_saved-news {
+.navigation_page_saved-news {
     color: black;
 }
 
@@ -20,7 +20,7 @@
 
 .navigation__home {
     margin: auto 16px auto 0;
-    font-family: Roboto;
+    font-family: 'Roboto', sans-serif;
     font-size: 18px;
     font-style: normal;
     font-weight: 500;
@@ -45,7 +45,7 @@
 .navigation__signin {
     color: white;
     background-color: transparent;
-    font-family: Roboto;
+    font-family: 'Roboto', sans-serif;
     font-size: 18px;
     font-style: normal;
     font-weight: 500;
@@ -60,7 +60,7 @@
 
 .navigation__saved-articles {
     text-decoration: none;
-    font-family: Roboto;
+    font-family: 'Roboto', sans-serif;
     font-size: 18px;
     font-style: normal;
     font-weight: 500;
@@ -81,7 +81,7 @@
     background-repeat: no-repeat;
     background-position: 80%;
     background-size: 24px 24px;
-    font-family: Roboto;
+    font-family: 'Roboto', sans-serif;
     font-size: 18px;
     font-style: normal;
     font-weight: 500;
@@ -103,7 +103,7 @@
     font-size: 44px;
     font-weight: 400;
     font-style: normal;
-    font-family: Roboto;
+    font-family: 'Roboto', sans-serif;
     transform: rotate(45deg);
     position: absolute;
     top: 16px;
@@ -116,10 +116,10 @@
         display: none;
         opacity: 0;
     }
-    .navigation__page_main {
+    .navigation_page_main {
         background-color: #1A1B22;
     }
-    .navigation__page_saved-news {
+    .navigation_page_saved-news {
         background-color: white;
     }
     .navigation_is_open {

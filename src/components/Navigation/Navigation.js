@@ -10,7 +10,7 @@ function Navigation(props) {
 
     return (
 
-        <nav className={`navigation navigation__page_${props.page} ${props.isNavMobileOpen ? 'navigation_is_open' : 'navigation_is_hidden'}`}>
+        <nav className={`navigation navigation_page_${props.page} ${props.isNavMobileOpen ? 'navigation_is_open' : 'navigation_is_hidden'}`}>
             <div className={`navigation__menu navigation__menu_page_${props.page} ${props.isNavMobileOpen ? 'navigation__menu_is_open' : ''}`}>
                 <button className={`button navigation__close navigation__close_page_${props.page}`} onClick={props.onClose}>+</button>
                 <NavLink to='/' className={`link navigation__home navigation__home_page_${props.page}`}

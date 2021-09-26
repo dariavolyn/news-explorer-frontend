@@ -4,7 +4,7 @@
 }
 
 .popup__success-singin {
-    font-family: Inter;
+    font-family: 'Inter', sans-serif;
     font-size: 14px;
     font-style: normal;
     font-weight: 400;
@@ -12,4 +12,11 @@
     margin: 0;
     padding: 14px 0 0 34px;
     color: #2F71E5;
+}
+
+@media screen and (min-width: 320px) and (max-width: 719px) {
+    .popup__container_type_success {
+        width: 100%;
+        height: 100%;
+    }
 }

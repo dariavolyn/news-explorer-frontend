@@ -3,7 +3,7 @@ import cardPicture1 from '../../images/card.jpeg';
 
 function NewsCard(props) {
     return (
-        <li className='news-card'>
+        <ul className='news-card'>
             <img className='news-card__picture' src={cardPicture1} alt="News cover"></img>
             <p className='news-card__picture-label'>Nature</p>
             {props.page === 'saved-news' && <button className='button news-card__button news-card__delete'></button>}
@@ -17,7 +17,7 @@ function NewsCard(props) {
                 <p className='news-card__text'>Ever since I read Richard Louv's influential book, "Last Child in the Woods," the idea of having a special "sit spot" has stuck with me. This advice, which Louv attributes to nature educator Jon Young, is for both adults and children to find...</p>
                 <p className='news-card__source'>Treehugger</p>
             </div>
-        </li>
+        </ul>
     )
 }
 
