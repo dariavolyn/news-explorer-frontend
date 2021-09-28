@@ -8,24 +8,15 @@ import Register from '../Register/Register.js';
 import Authentication from '../Authentication/Authentication.js';
 import SavedNews from '../SavedNews/SavedNews.js';
 import SuccessPopup from '../SuccessPopup/SuccessPopup.js';
-import Preloader from '../Preloader/Preloader.js';
-import NothingFound from '../NothingFound/NothingFound.js';
 
 
 function App(props) {
     const [isRegisterOpen, setRegisterOpen] = useState(false);
     const [isAuthOpen, setAuthOpen] = useState(false);
     const [isNavMobileOpen, setNavMobileOpen] = useState(false);
-    const [isSearchButtonClicked, setSearchButtonClicked] = useState(false);
     const [isCardSaved, setCardSaved] = useState(false);
     const [isSuccessPopupOpen, setSuccessPopupOpen] = useState(false);
-    const [isLoaded, setIsLoaded] = useState(false);
     const history = useHistory();
-
-    useEffect(() => {
-        setTimeout(
-            setIsLoaded(true), 1000)
-    }, []);
 
     useEffect(() => {
         const close = (e) => {
@@ -50,11 +41,6 @@ function App(props) {
 
     function handleNavMobileOpen() {
         setNavMobileOpen(true);
-    }
-
-    function handleSearchButtonClicked(e) {
-        e.preventDefault();
-        setSearchButtonClicked(true);
     }
 
     function handleSaveCard() {
@@ -84,8 +70,7 @@ function App(props) {
 
     return (
         <>
-            <Preloader isLoaded={isLoaded} />
-            {isLoaded && <div className='app'>
+            <div className='app'>
                 <Switch>
                     <Route exact path='/'>
                         <Header
@@ -97,8 +82,6 @@ function App(props) {
                         />
                         <Main
                             page='main'
-                            isClicked={isSearchButtonClicked}
-                            onSearch={handleSearchButtonClicked}
                             onSave={handleSaveCard}
                             isSaved={isCardSaved}
                         />
@@ -113,10 +96,6 @@ function App(props) {
                         />
                     </Route>
 
-                    <Route path='*'>
-                        <NothingFound />
-                    </Route>
-
                 </Switch>
 
                 <Register isOpen={isRegisterOpen} onClose={closeAllPopups} openAltForm={handleAuthOpen} register={handleRegister} />
@@ -126,7 +105,8 @@ function App(props) {
                 <SuccessPopup isOpen={isSuccessPopupOpen} onClose={closeAllPopups} openAuth={handleAuthOpen} />
 
                 <Footer />
-            </div>}
+
+            </div>
         </>
     )
 }

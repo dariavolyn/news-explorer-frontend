@@ -94,11 +94,29 @@
     border-radius: 10px;
 }
 
+.news-card__tooltip {
+    background-color: white;
+    width: 159px;
+    position: absolute;
+    top: 0;
+    right: 45px;
+    border-radius: 10px;
+}
+
+.tooltip-wrap_type_delete {
+    display: none;
+}
+
+.tooltip-wrap_type_save {
+    display: none;
+}
+
 .news-card__delete {
     background-image: url('../../images/trash.svg');
 }
 
-.news-card__delete:hover {
+.news-card__delete:hover .tooltip-wrap_type_delete {
+    display: block;
     background-image: url('../../images/trash-black.svg');
 }
 
@@ -106,12 +124,24 @@
     background-image: url('../../images/bookmark.svg');
 }
 
-.news-card__save:hover {
+.news-card__save:hover .tooltip-wrap_type_save {
+    display: block;
     background-image: url('../../images/bookmark-black.svg');
 }
 
 .news-card__save_saved {
     background-image: url('../../images/bookmark-blue.svg');
+}
+
+.news-card__tooltip-text {
+    font-family: 'Roboto', sans-serif;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 14px;
+    text-align: center;
+    margin: 0;
+    padding: 13px 0;
 }
 
 .news-card__source {

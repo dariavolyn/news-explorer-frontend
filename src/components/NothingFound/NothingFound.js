@@ -1,11 +1,12 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import nothingFoundIconPath from '../../images/not-found_v1.svg';
 
-function NothingFound() {
+function NothingFound(props) {
     return (
-        <div className='nothing-found'>
-            <h3 className='nothing-found__mesage'>Sorry, nothing was found!</h3>
-            <NavLink to='/' className='link nothing-found__link'>Back to main</NavLink>
+        <div className={`nothing-found ${props.isOpen ? '' : 'nothing-found_hide'}`}>
+            <img className='nothing-found__icon' alt='Nothing found' src={nothingFoundIconPath}></img>
+            <h3 className='nothing-found__title'>Nothing found</h3>
+            <p className='nothing-found__message'>Sorry, but nothing matched your search terms.</p>
         </div>
     )
 }

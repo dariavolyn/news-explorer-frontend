@@ -1,33 +1,49 @@
 .nothing-found {
-    margin: 0;
     padding: 0;
-    background-color: #F5F6F7;
-    width: 100%;
-    height: calc(100vh - 80px);
+    margin: 0;
+    height: 374px;
     display: flex;
     flex-direction: column;
-    align-content: center;
     justify-content: center;
+    align-content: center;
+    background-color: #F5F6F7;
 }
 
-.nothing-found__mesage {
-    font-family: 'Roboto', sans-serif;
-    font-weight: 400;
-    font-size: 44px;
-    line-height: 44px;
-    margin: 0;
+.nothing-found_hide {
+    opacity: 0;
+    display: none;
+    visibility: hidden;
+}
+
+.nothing-found__icon {
+    width: 96px;
+    height: 96px;
+    margin: 0 auto;
     padding: 0;
-    text-align: center;
 }
 
-.nothing-found__link {
-    font-family: 'Inter', sans-serif;
-    color: #2F71E5;
-    font-size: 25px;
+.nothing-found__title {
+    font-family: 'Roboto Slab', sans-serif;
+    font-size: 26px;
     font-style: normal;
     font-weight: 400;
-    line-height: 25px;
-    margin: 0;
+    line-height: 30px;
+    letter-spacing: 0px;
     text-align: center;
-    padding: 5% 0 0 0;
+    margin: 24px auto 0 auto;
+    padding: 0;
+}
+
+.nothing-found__message {
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: 0px;
+    text-align: center;
+    margin: 16px auto 0 auto;
+    color: #B6BCBF;
+    padding: 0;
+    max-width: 250px;
 }
