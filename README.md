@@ -1,1 +1,1 @@
-# news-explorer-frontend
+Stage 2, frontend.

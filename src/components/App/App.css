@@ -1,0 +1,22 @@
+.app {
+    max-width: 1440px;
+    font-family: 'Roboto', sans-serif;
+    margin: 0 auto;
+    padding: 0;
+    background-color: #F5F6F7;
+}
+
+.button {
+    background-color: transparent;
+    border: none;
+    margin: 0;
+    padding: 0;
+}
+
+.button:hover {
+    cursor: pointer;
+}
+
+.link {
+    text-decoration: none;
+}
