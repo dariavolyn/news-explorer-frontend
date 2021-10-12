@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { Route, Switch, useHistory } from 'react-router-dom';
 
-import Header from '../Header/Header.js';
-import Main from '../Main/Main.js';
-import Footer from '../Footer/Footer.js';
-import Register from '../Register/Register.js';
 import Authentication from '../Authentication/Authentication.js';
+import Header from '../Header/Header.js';
+import Footer from '../Footer/Footer.js';
+import Main from '../Main/Main.js';
+import Register from '../Register/Register.js';
 import SavedNews from '../SavedNews/SavedNews.js';
 import SuccessPopup from '../SuccessPopup/SuccessPopup.js';
+import newsApi from '../../utils/NewsApi.js';
 
 
 function App(props) {
+    const [cards, setCards] = useState([]);
     const [isRegisterOpen, setRegisterOpen] = useState(false);
     const [isAuthOpen, setAuthOpen] = useState(false);
     const [isNavMobileOpen, setNavMobileOpen] = useState(false);
@@ -19,14 +21,20 @@ function App(props) {
     const history = useHistory();
 
     useEffect(() => {
-        const close = (e) => {
-            if (e.keyCode === 27) {
-                closeAllPopups();
-            }
-        }
+        const close = (e) => { if (e.keyCode === 27) { closeAllPopups(); } }
         window.addEventListener('keydown', close)
         return () => window.removeEventListener('keydown', close)
     }, [])
+
+    function getCards() {
+        newsApi.getCardsList()
+            .then((res) => {
+                setCards(res);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }
 
     function handleAuthOpen() {
         setSuccessPopupOpen(false);
@@ -81,6 +89,8 @@ function App(props) {
                             onClose={closeAllPopups}
                         />
                         <Main
+                            cards={cards.articles}
+                            onSubmit={getCards}
                             page='main'
                             onSave={handleSaveCard}
                             isSaved={isCardSaved}

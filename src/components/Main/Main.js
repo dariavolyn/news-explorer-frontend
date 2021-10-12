@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+
 import About from '../About/About.js';
 import NewsCardList from '../NewsCardList/NewsCardList.js';
 import NothingFound from '../NothingFound/NothingFound.js';
@@ -7,7 +8,7 @@ import SearchForm from '../SearchForm/SearchForm.js'
 
 function Main(props) {
     const [search, setSearch] = useState('');
-    const [isFound, setIsFound] = useState(false);
+    //const [isFound, setIsFound] = useState(false);
     const [isNothingFoundOpen, setIsNothingFoundOpen] = useState(false);
     const [isPreloaderOpen, setIsPreloaderOpen] = useState(false);
 
@@ -15,30 +16,29 @@ function Main(props) {
         setSearch(e.target.value);
     }
 
-    function onSubmit(e) {
-        e.preventDefault();
-
+    function onSubmit() {
+        props.onSubmit();
         closeResults();
 
-        setIsPreloaderOpen(true);
+        //  setIsPreloaderOpen(true);
 
-        setTimeout(() => {
-            setIsPreloaderOpen(false);
-            if (search === '') {
-                setIsNothingFoundOpen(true);
-            } else {
-                setIsFound(true);
-            }
-        }, 1000)
+      
 
-
+        // setTimeout(() => {
+        //     setIsPreloaderOpen(false);
+        //     if (search === '') {
+        //         setIsNothingFoundOpen(true);
+        //     } else {
+        //         setIsFound(true);
+        //     }
+        // }, 1000)
     }
 
     function closeResults() {
         setIsNothingFoundOpen(false);
         setIsPreloaderOpen(false);
-        setIsFound(false);
     }
+
 
     return (
         <main className='main'>
@@ -51,7 +51,8 @@ function Main(props) {
                 </div>
             </div>
 
-            {isFound && <NewsCardList
+            {props.cards && <NewsCardList
+                cards={props.cards}
                 page={props.page}
                 isSaved={props.isSaved}
                 onSave={props.onSave}
