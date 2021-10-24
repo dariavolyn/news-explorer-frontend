@@ -9,15 +9,18 @@ import Register from '../Register/Register.js';
 import SavedNews from '../SavedNews/SavedNews.js';
 import SuccessPopup from '../SuccessPopup/SuccessPopup.js';
 import newsApi from '../../utils/NewsApi.js';
+import mainApi from '../../utils/MainApi.js';
 
 
-function App(props) {
+function App() {
     const [cards, setCards] = useState([]);
     const [isRegisterOpen, setRegisterOpen] = useState(false);
     const [isAuthOpen, setAuthOpen] = useState(false);
     const [isNavMobileOpen, setNavMobileOpen] = useState(false);
     const [isCardSaved, setCardSaved] = useState(false);
     const [isSuccessPopupOpen, setSuccessPopupOpen] = useState(false);
+    const [isPreloaderOpen, setIsPreloaderOpen] = useState(false);
+    const [isNothingFoundOpen, setIsNothingFoundOpen] = useState(false);
     const history = useHistory();
 
     useEffect(() => {
@@ -26,11 +29,20 @@ function App(props) {
         return () => window.removeEventListener('keydown', close)
     }, [])
 
-    function getCards() {
-        newsApi.getCardsList()
+    function searchCards(search) {
+        setIsPreloaderOpen(true);
+
+        setIsNothingFoundOpen(false);
+
+        setCards([]);
+
+        newsApi.getCardsList(search)
             .then((res) => {
-                setCards(res);
+                if (res.totalResults === 0) {
+                    setIsNothingFoundOpen(true);
+                } else { setCards(res) }
             })
+            .then(() => setIsPreloaderOpen(false))
             .catch((err) => {
                 console.log(err);
             });
@@ -57,17 +69,28 @@ function App(props) {
         } setCardSaved(true)
     }
 
-    function closeAllPopups() {
+    function closeAllPopups(e) {
+        history.push('/');
         setSuccessPopupOpen(false);
         setRegisterOpen(false);
         setAuthOpen(false);
         setNavMobileOpen(false);
     }
 
-    function handleRegister(e) {
-        e.preventDefault();
-        setSuccessPopupOpen(true);
-        setRegisterOpen(false);
+    function handleRegister (email, password, username) {
+        console.log(email, password, username)
+        mainApi.registerUser(email, password, username)
+            .then((res) => {
+                if (res) {
+                    setSuccessPopupOpen(true);
+                    setRegisterOpen(false);
+                    history.push('/signin');
+                } else {
+                    return
+                }
+            }).catch(e => {
+                console.log(e);
+            })
     }
 
     function handleAuth(e) {
@@ -79,40 +102,68 @@ function App(props) {
     return (
         <>
             <div className='app'>
+
                 <Switch>
-                    <Route exact path='/'>
+
+                    <Route path='/'>
                         <Header
-                            page='main'
-                            onAuth={handleAuthOpen}
                             isNavMobileOpen={isNavMobileOpen}
-                            onOpen={handleNavMobileOpen}
+                            onAuth={handleAuthOpen}
                             onClose={closeAllPopups}
+                            onOpen={handleNavMobileOpen}
+                            handleRegisterOpen={handleRegisterOpen}
+                            page='main'
                         />
                         <Main
                             cards={cards.articles}
-                            onSubmit={getCards}
-                            page='main'
-                            onSave={handleSaveCard}
+                            isNothingFoundOpen={isNothingFoundOpen}
+                            isPreloaderOpen={isPreloaderOpen}
                             isSaved={isCardSaved}
+                            onSave={handleSaveCard}
+                            page='main'
+                            searchCards={searchCards}
                         />
                     </Route>
 
                     <Route exact path='/saved-news'>
                         <SavedNews
-                            page='saved-news'
                             isNavMobileOpen={isNavMobileOpen}
+                            onClose={closeAllPopups}
                             onOpen={handleNavMobileOpen}
+                            page='saved-news'
+                        />
+                    </Route>
+
+                </Switch>
+                <Switch>
+                    <Route exact path='/signin'>
+                        <Authentication
+                            altFormTitle='Sign up'
+                            altFormLink='/signup'
+                            openAltForm={handleRegisterOpen}
+                            isOpen={isAuthOpen}
+                            formSubmit={handleAuth}
+                            onClose={closeAllPopups}
+                        />
+                    </Route>
+
+                    <Route exact path='/signup'>
+                        <Register
+                            altFormTitle='Sign in'
+                            altFormLink='/signin'
+                            openAltForm={handleAuthOpen}
+                            isOpen={isRegisterOpen}
+                            formSubmit={handleRegister}
                             onClose={closeAllPopups}
                         />
                     </Route>
 
                 </Switch>
-
-                <Register isOpen={isRegisterOpen} onClose={closeAllPopups} openAltForm={handleAuthOpen} register={handleRegister} />
-
-                <Authentication isOpen={isAuthOpen} onClose={closeAllPopups} openAltForm={handleRegisterOpen} auth={handleAuth} />
-
-                <SuccessPopup isOpen={isSuccessPopupOpen} onClose={closeAllPopups} openAuth={handleAuthOpen} />
+                <SuccessPopup
+                    isOpen={isSuccessPopupOpen}
+                    openAuth={handleAuthOpen}
+                    onClose={closeAllPopups}
+                />
 
                 <Footer />
 

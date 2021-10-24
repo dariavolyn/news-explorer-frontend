@@ -16,6 +16,7 @@ function Header(props) {
                 isNavMobileOpen={props.isNavMobileOpen}
                 onAuth={props.onAuth}
                 onClose={props.onClose}
+                handleRegisterOpen={props.handleRegisterOpen}
             />
         </header>
     )

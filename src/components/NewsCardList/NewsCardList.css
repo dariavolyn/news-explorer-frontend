@@ -48,7 +48,7 @@
         padding-bottom: 20px;
     }
     .news-list__cards {
-        max-width: 688px;
+        width: 100%;
         grid-gap: 8px;
         grid-template-columns: repeat(auto-fit, 30%);
     }

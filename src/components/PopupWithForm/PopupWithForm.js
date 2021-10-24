@@ -1,18 +1,24 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 function PopupWithForm(props) {
     return (
         <section className={`popup popup_type_${props.type} ${props.isOpen ? 'popup_is_open' : ''}`}>
             <div className='popup__container popup__containter_type_form'>
                 <button type='button' aria-label='close' className='button popup__close' onClick={props.onClose}></button>
                 <h2 className='popup__title'>{props.title}</h2>
-                <form className='popup__form' action='#'>
+                <form noValidate className='popup__form'>
                     {props.children}
-                    <button type='submit' value='submit' className='button popup__submit' 
-                    onClick={props.type === 'register' ? props.register : props.auth }>{props.buttonText}</button>
-                    <p className="popup__form-alt">or <button onClick={props.openAltForm} className='button popup__form-alt-link'>{props.altForm}</button></p>
+                    <button type='submit' value='submit' disabled={props.isValid === false && 'disabled'}
+                        className={`button popup__submit ${props.isValid === false && 'popup__submit_disabled'}`}
+                        onClick={props.formSubmit}>{props.buttonText}</button>
+                    <p className="popup__form-alt">or <NavLink
+                        to={props.altFormLink}
+                        onClick={props.openAltForm}
+                        className='button popup__form-alt-link'>{props.altFormTitle}</NavLink>
+                    </p>
                 </form>
             </div>
-        </section>
+        </section >
     )
 }
 

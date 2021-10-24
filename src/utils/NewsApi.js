@@ -18,8 +18,8 @@ class NewsApi {
         return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)
     }
 
-    getCardsList() {
-        return fetch(`${this.newsUrl}/everything?q=bitcoin&from=${todayDateMinusSeven()}&to=${todayDate()}&pageSize=3&apiKey=c4ef0e54c94849e194ad5251b2d39e56`,
+    getCardsList(search) {
+        return fetch(`${this.newsUrl}/everything?q=${search}&from=${todayDateMinusSeven()}&to=${todayDate()}&pageSize=10&apiKey=c4ef0e54c94849e194ad5251b2d39e56`,
             {
                 method: 'GET',
                 headers: this.headers
@@ -29,7 +29,7 @@ class NewsApi {
 }
 
 const newsApi = new NewsApi({
-    newsUrl: 'https://nomoreparties.co/news/v2/',
+    newsUrl: 'https://nomoreparties.co/news/v2',
     headers: {
         'Content-Type': 'application/json'
     }

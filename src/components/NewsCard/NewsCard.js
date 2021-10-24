@@ -1,6 +1,5 @@
 import React from 'react';
 import Moment from 'moment';
-import cardPicture1 from '../../images/card.jpeg';
 
 function NewsCard(props) {
 
@@ -10,19 +9,25 @@ function NewsCard(props) {
         return Moment(d).format('DD MMMM YYYY');
     }
 
+    function openArticle() {
+        window.open(props.link);
+    }
+
     return (
         <li className='news-card'>
-            {props.image
-                ? <img className='news-card__picture' src={props.image} alt="News cover"></img>
-                : <div className='news-card__no-img-container'>
-                    <p className='news-card__no-img'>No image</p>
-                </div>}
-            <p className='news-card__picture-label'>Label</p>
+            <button className='button news-card__link'>
+                {props.image
+                    ? <img className='news-card__picture' src={props.image} alt="News cover" onClick={openArticle} />
+                    : <div className='news-card__no-img-container'>
+                        <p className='news-card__no-img'>No image</p>
+                    </div>}
+            </button>
 
             {props.page === 'saved-news' &&
                 <button className='button news-card__button news-card__delete'>
+                    <p className='news-card__picture-label'>Label</p>
                     <div className='news-card__tooltip-wrap tooltip-wrap_type_delete'>
-                        <div class='news-card__tooltip'>
+                        <div className='news-card__tooltip'>
                             <p className='news-card__tooltip-text'>Remove from saved</p>
                         </div>
                     </div>
@@ -33,7 +38,7 @@ function NewsCard(props) {
                     onClick={props.onSave}
                     className={`button news-card__button news-card__save ${props.isSaved ? 'news-card__saved' : ''}`}>
                     <div className='news-card__tooltip-wrap tooltip-wrap_type_save'>
-                        <div class='news-card__tooltip'>
+                        <div className='news-card__tooltip'>
                             <p className='news-card__tooltip-text'>Sign in to save articles</p>
                         </div>
                     </div>

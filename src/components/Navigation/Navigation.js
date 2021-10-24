@@ -20,7 +20,7 @@ function Navigation(props) {
                     exact activeClassName='navigation__saved-articles_active'>Saved articles</NavLink>}
                 {props.page === 'saved-news'
                     ? <button className='button navigation__exit' onClick={signOut}>{props.user}</button>
-                    : <button className='button navigation__signin' onClick={props.onAuth}>Sign in</button>
+                    : <NavLink to='/signin' className='link navigation__signin' onClick={props.onAuth}>Sign in</NavLink>
                 }
             </div>
         </nav>

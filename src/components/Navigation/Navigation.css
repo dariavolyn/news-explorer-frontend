@@ -13,7 +13,7 @@
 }
 
 .navigation__menu {
-    margin: 0;
+    margin: 12px 0 0 0;
     width: 100%;
     padding: 0;
 }
@@ -44,16 +44,13 @@
 
 .navigation__signin {
     color: white;
-    background-color: transparent;
     font-family: 'Roboto', sans-serif;
     font-size: 18px;
     font-style: normal;
     font-weight: 500;
     line-height: 24px;
-    margin: auto 16px auto 0;
-    padding: auto 0;
-    height: 48px;
-    width: 176px;
+    margin: 0;
+    padding: 12px 54px;
     border: 1px solid white;
     border-radius: 100px;
 }
