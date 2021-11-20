@@ -38,12 +38,13 @@ function Main(props) {
 
             {props.cards && <NewsCardList
                 cards={props.cards}
-                isSaved={props.isSaved}
+                keyword={props.keyword}
+                isLoggedIn={props.isLoggedIn}
                 numberOfCards={numberOfCards}
-                onSave={props.onSave}
                 page={props.page}
                 search={search}
                 showMore={showMore}
+                onSave={props.onSave}
             />}
 
             <NothingFound isOpen={props.isNothingFoundOpen} />

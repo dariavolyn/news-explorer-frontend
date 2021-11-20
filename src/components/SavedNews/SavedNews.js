@@ -6,17 +6,23 @@ import SavedNewsHeader from '../SavedNewsHeader/SavedNewsHeader';
 function SavedNews(props) {
     return (
         <div className='saved-news'>
-            <Header 
-            page={props.page}
-            user='Elise' 
-            isNavMobileOpen={props.isNavMobileOpen}
-            onOpen={props.onOpen}
-            onClose={props.onClose}
+            <Header
+                isLoggedIn={props.isLoggedIn}
+                isNavMobileOpen={props.isNavMobileOpen}
+                onClose={props.onClose}
+                onOpen={props.onOpen}
+                page={props.page}
+                handleSignOut={props.handleSignOut}
             />
 
             <SavedNewsHeader />
 
-            <NewsCardList page={props.page} />
+            <NewsCardList
+                cards={props.cards}
+                page={props.page}
+                numberOfCards='1000'
+            />
+
         </div >
     )
 }

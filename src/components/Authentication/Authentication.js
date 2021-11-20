@@ -1,14 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PopupWithForm from '../PopupWithForm/PopupWithForm.js';
 import { useFormWithValidation } from '../FormValidation/FormValidation.js';
 
 function Authentication(props) {
-    const { handleChange, isValid, resetForm } = useFormWithValidation({})
+    const { values, handleChange, isValid, resetForm } = useFormWithValidation({});
 
     const submitForm = (e) => {
         e.preventDefault();
+        const { email, password } = values;
+        props.formSubmit(email, password);
         resetForm();
     }
+
 
     return (
         <PopupWithForm
@@ -33,7 +36,7 @@ function Authentication(props) {
                 onChange={handleChange}
                 name='email'
             />
-            <span className={`popup__error ${isValid === false && 'popup__error_visible'}`}>Ivalid email address</span>
+            <span className={`popup__error ${isValid === false && values.email !== undefined && 'popup__error_visible'}`}>Invalid email address</span>
 
             <h6 className='popup__input-title popup__input-title_type_password'>Password</h6>
             <input
@@ -43,9 +46,11 @@ function Authentication(props) {
                 className='popup__input popup__input_type_password'
                 placeholder='Enter password'
                 name='password'
+                required
                 onChange={handleChange}
             />
-        </PopupWithForm>
+            <span className={`popup__error ${!props.isLoginSuccess && 'popup__error_visible'}`}>Incorrect email or password</span>
+        </PopupWithForm> 
     )
 }
 

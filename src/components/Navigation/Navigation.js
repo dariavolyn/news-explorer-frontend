@@ -1,30 +1,36 @@
 import React from 'react';
-import { NavLink, useHistory } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
 function Navigation(props) {
-    const history = useHistory();
-
-    function signOut() {
-        history.push('/');
-    }
+    const currentUser = React.useContext(CurrentUserContext);
 
     return (
+        <nav className={`nav nav_page_${props.page}
+         ${props.isNavMobileOpen ? 'nav_is_open' : 'nav_is_hidden'}`}>
 
-        <nav className={`navigation navigation_page_${props.page} ${props.isNavMobileOpen ? 'navigation_is_open' : 'navigation_is_hidden'}`}>
-            <div className={`navigation__menu navigation__menu_page_${props.page} ${props.isNavMobileOpen ? 'navigation__menu_is_open' : ''}`}>
-                <button className={`button navigation__close navigation__close_page_${props.page}`} onClick={props.onClose}>+</button>
-                <NavLink to='/' className={`link navigation__home navigation__home_page_${props.page}`}
-                    exact activeClassName='navigation__home_active'>Home</NavLink>
-                {props.page === 'saved-news' && <NavLink to='/saved-news'
-                    className='button navigation__saved-articles'
-                    exact activeClassName='navigation__saved-articles_active'>Saved articles</NavLink>}
-                {props.page === 'saved-news'
-                    ? <button className='button navigation__exit' onClick={signOut}>{props.user}</button>
-                    : <NavLink to='/signin' className='link navigation__signin' onClick={props.onAuth}>Sign in</NavLink>
+            <div className={`nav__menu nav__menu_page_${props.page} 
+            ${props.isNavMobileOpen ? 'nav__menu_is_open' : ''}`}>
+
+                <button className={`button nav__close nav__close_page_${props.page}`}
+                    onClick={props.onClose}>+</button>
+
+                <NavLink to='/' className={`link nav__home nav__home_page_${props.page}`}
+                    exact activeClassName='nav__home_active'>Home</NavLink>
+
+                {props.isLoggedIn === false && <NavLink to='/signin' className='link nav__signin'
+                    onClick={props.onAuth}>Sign in</NavLink>}
+
+                {props.isLoggedIn === true &&
+                    <>
+                        <NavLink to='/saved-news' className={`button nav__saved-articles 
+                            nav__saved-articles_page_${props.page}`}
+                            exact activeClassName={`nav__saved-articles_active_page_${props.page}`}>Saved articles</NavLink>
+                        <button className={`button nav__exit nav__exit_page_${props.page}`} onClick={props.signOut}>{currentUser.username}</button>
+                    </>
                 }
             </div>
         </nav>
-
     )
 }
 

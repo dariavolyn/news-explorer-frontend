@@ -170,11 +170,12 @@
     display: block;
 }
 
-.news-card__save_saved {
+.news-card__saved {
     background-image: url('../../images/bookmark-blue.svg');
 }
 
 .news-card__tooltip-text {
+    color: black;
     font-family: 'Roboto', sans-serif;
     font-size: 12px;
     font-style: normal;

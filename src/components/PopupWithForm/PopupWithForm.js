@@ -8,7 +8,7 @@ function PopupWithForm(props) {
                 <h2 className='popup__title'>{props.title}</h2>
                 <form noValidate className='popup__form'>
                     {props.children}
-                    <button type='submit' value='submit' disabled={props.isValid === false && 'disabled'}
+                    <button type='submit' value='submit' disabled={props.isValid === false && true}
                         className={`button popup__submit ${props.isValid === false && 'popup__submit_disabled'}`}
                         onClick={props.formSubmit}>{props.buttonText}</button>
                     <p className="popup__form-alt">or <NavLink

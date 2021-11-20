@@ -8,21 +8,24 @@ function NewsCardList(props) {
         <section className='news-list'>
             {props.page === 'main' && <h3 className='news-list__title'>Search results</h3>}
 
-            <ul className='news-list__cards'>
+            {props.cards && <ul className='news-list__cards'>
                 {props.cards.slice(0, props.numberOfCards).map((card) => (
                     <NewsCard
+                        card={card}
                         date={card.publishedAt.toString()}
                         image={card.urlToImage}
+                        isLoggedIn={props.isLoggedIn}
                         key={uuidv4()}
+                        keyword={props.keyword}
                         link={card.url}
-                        onSave={props.onSave}
                         page={props.page}
                         search={props.search}
                         source={card.source.name}
+                        onSave={props.onSave}
                         text={card.content}
                         title={card.title}
                     />))}
-            </ul>
+            </ul>}
 
             {props.page === 'main' &&
                 <button

@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Moment from 'moment';
 
 function NewsCard(props) {
+    const [isCardSaved, setCardSaved] = useState(false);
 
     function convertDate() {
         Moment.locale('en');
@@ -11,6 +12,15 @@ function NewsCard(props) {
 
     function openArticle() {
         window.open(props.link);
+    }
+
+    function onSave() {
+        if (isCardSaved === true) {
+            setCardSaved(false);
+        } else {
+            props.onSave(props.card);
+            setCardSaved(true);
+        }
     }
 
     return (
@@ -35,12 +45,13 @@ function NewsCard(props) {
 
             {props.page === 'main' &&
                 <button
-                    onClick={props.onSave}
-                    className={`button news-card__button news-card__save ${props.isSaved ? 'news-card__saved' : ''}`}>
+                    disabled={props.isLoggedIn === false && true}
+                    onClick={onSave}
+                    className={`button news-card__button news-card__save ${isCardSaved ? 'news-card__saved' : ''}`}>
                     <div className='news-card__tooltip-wrap tooltip-wrap_type_save'>
-                        <div className='news-card__tooltip'>
+                        {props.isLoggedIn === false && <div className='news-card__tooltip'>
                             <p className='news-card__tooltip-text'>Sign in to save articles</p>
-                        </div>
+                        </div>}
                     </div>
                 </button>}
 

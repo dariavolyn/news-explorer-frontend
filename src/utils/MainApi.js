@@ -17,10 +17,10 @@ class MainApi {
             },
             body: JSON.stringify({ email, password, username })
         })
-        .then(this._checkResponse)
+            .then(this._checkResponse)
     }
 
-    authorizeUser({ email, password }) {
+    authorizeUser(email, password) {
         return fetch(`${this.baseUrl}/signin`, {
             method: "POST",
             headers: {
@@ -52,10 +52,52 @@ class MainApi {
             .then(this._checkResponse)
             .then(data => data)
     }
+
+    getUserInfo(token) {
+        return fetch(`${this.baseUrl}/users/me`, {
+            method: "GET",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
+            }
+        })
+            .then(this._checkResponse)
+    }
+
+    saveArticle(token, keyword, article) {
+        const { description, publishedAt, source, title, url, urlToImage } = article;
+
+        return fetch(`${this.baseUrl}/articles`, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
+
+            },
+            body: JSON.stringify({ keyword, description, publishedAt, source: source.name, title, url, urlToImage })
+        })
+            .then(this._checkResponse)
+    }
+
+    getSavedArticles() {
+        return fetch(`${this.baseUrl}/articles`, {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(this._checkResponse)
+    }
 }
 
 const mainApi = new MainApi({
-    baseUrl: "https://api.dasha-news.students.nomoreparties.site"
-}) 
+    baseUrl:
+        process.env.NODE_ENV === "production"
+            ? "https://api.daria-news.students.nomoreparties.site"
+            : "http://localhost:3000",
+})
 
 export default mainApi;
