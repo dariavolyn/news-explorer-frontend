@@ -15,12 +15,12 @@ function SavedNews(props) {
                 handleSignOut={props.handleSignOut}
             />
 
-            <SavedNewsHeader />
+            <SavedNewsHeader savedCards={props.savedCards}/>
 
             <NewsCardList
-                cards={props.cards}
+                handleDeleteArticle={props.handleDeleteArticle}
+                savedCards={props.savedCards}
                 page={props.page}
-                numberOfCards='1000'
             />
 
         </div >

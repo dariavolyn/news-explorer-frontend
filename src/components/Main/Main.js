@@ -42,9 +42,11 @@ function Main(props) {
                 isLoggedIn={props.isLoggedIn}
                 numberOfCards={numberOfCards}
                 page={props.page}
+                setSavedCards={props.setSavedCards}
+                savedCards={props.savedCards}
                 search={search}
                 showMore={showMore}
-                onSave={props.onSave}
+                handleSaveArticle={props.handleSaveArticle}
             />}
 
             <NothingFound isOpen={props.isNothingFoundOpen} />

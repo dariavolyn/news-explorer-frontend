@@ -18,9 +18,23 @@ function NewsCard(props) {
         if (isCardSaved === true) {
             setCardSaved(false);
         } else {
-            props.onSave(props.card);
             setCardSaved(true);
+            props.handleSaveArticle({
+                link: props.link,
+                image: props.image,
+                date: props.date,
+                title: props.title,
+                text: props.text,
+                source: props.source,
+                keyword: props.keyword,
+                owner: props.owner,
+            })
+
         }
+    }
+
+    function onDelete() {
+        props.handleDeleteArticle(props.id);
     }
 
     return (
@@ -34,14 +48,16 @@ function NewsCard(props) {
             </button>
 
             {props.page === 'saved-news' &&
-                <button className='button news-card__button news-card__delete'>
-                    <p className='news-card__picture-label'>Label</p>
-                    <div className='news-card__tooltip-wrap tooltip-wrap_type_delete'>
-                        <div className='news-card__tooltip'>
-                            <p className='news-card__tooltip-text'>Remove from saved</p>
+                <>
+                    <p className='news-card__picture-label'>{props.keyword}</p>
+                    <button className='button news-card__button news-card__delete' onClick={onDelete}>
+                        <div className='news-card__tooltip-wrap tooltip-wrap_type_delete'>
+                            <div className='news-card__tooltip'>
+                                <p className='news-card__tooltip-text'>Remove from saved</p>
+                            </div>
                         </div>
-                    </div>
-                </button>}
+                    </button>
+                </>}
 
             {props.page === 'main' &&
                 <button

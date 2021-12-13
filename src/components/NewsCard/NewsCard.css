@@ -71,9 +71,9 @@
 
 .news-card__picture {
     width: 100%;
-    height: 50%;
     margin: 0;
     padding: 0;
+    height: 272px;
     border-radius: 20px 20px 0 0;
     position: relative;
     object-fit: cover;
@@ -83,6 +83,7 @@
     margin: 0;
     padding: 0;
     height: 50%;
+    max-height: 272px;
     background-color: #B6BCBF;
     border-radius: 20px 20px 0 0;
     display: flex;
@@ -114,8 +115,10 @@
     font-weight: 500;
     line-height: 24px;
     position: absolute;
-    top: 24px;
     left: 24px;
+    top: 24px;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .news-card__button {

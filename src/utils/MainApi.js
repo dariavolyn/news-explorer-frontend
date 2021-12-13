@@ -40,7 +40,8 @@ class MainApi {
             })
     }
 
-    getContent(token) {
+    getContent() {
+        const token = localStorage.getItem('token');
         return fetch(`${this.baseUrl}/users/me`, {
             method: 'GET',
             headers: {
@@ -65,8 +66,8 @@ class MainApi {
             .then(this._checkResponse)
     }
 
-    saveArticle(token, keyword, article) {
-        const { description, publishedAt, source, title, url, urlToImage } = article;
+    saveArticle(article) {
+        const token = localStorage.getItem('token');
 
         return fetch(`${this.baseUrl}/articles`, {
             method: 'POST',
@@ -76,20 +77,38 @@ class MainApi {
                 'Authorization': `Bearer ${token}`,
 
             },
-            body: JSON.stringify({ keyword, description, publishedAt, source: source.name, title, url, urlToImage })
+            body: JSON.stringify(article)
         })
             .then(this._checkResponse)
     }
 
     getSavedArticles() {
+        const token = localStorage.getItem('token');
+
         return fetch(`${this.baseUrl}/articles`, {
             method: 'GET',
             headers: {
                 'Accept': 'application/json',
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
             }
         })
             .then(this._checkResponse)
+    }
+
+    deleteSavedArticle(id) {
+        const token = localStorage.getItem('token');
+
+        return fetch(`${this.baseUrl}/articles/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
+            }
+        })
+            .then(this._checkResponse)
+
     }
 }
 

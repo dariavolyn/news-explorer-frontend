@@ -19,7 +19,6 @@ function App() {
     const [keyword, setKeyword] = useState([]);
 
     const [currentUser, setCurrentUser] = useState({});
-    const [token, setToken] = useState([]);
 
     const [isAuthOpen, setAuthOpen] = useState(false);
     const [isLoggedIn, setLoggedIn] = useState(false);
@@ -44,7 +43,6 @@ function App() {
         if (token) {
             mainApi.getContent(token)
                 .then(() => {
-                    setToken(token);
                     setLoggedIn(true);
                 })
                 .catch((e) => console.log(e))
@@ -52,7 +50,7 @@ function App() {
     }, [])
 
     // getting user info
-    React.useEffect(() => {
+    useEffect(() => {
         const token = localStorage.getItem('token');
         if (token) {
             mainApi.getUserInfo(token)
@@ -139,22 +137,38 @@ function App() {
 
     // saving an article 
     function handleSaveArticle(card) {
-        mainApi.saveArticle(token, keyword, card)
+        mainApi.saveArticle(card)
             .then((res) => {
-                setSavedCards(res);
+                savedCards.push(res);
+                setSavedCards(res.data);
             })
             .catch((e) => console.log(e))
+
+            mainApi.getSavedArticles()
+            .then((res) => {
+                setSavedCards(res.data.reverse());
+            })
+            .catch((e) => console.log(e));
     }
 
-    console.log('app.js', savedCards);
-
-    // load saved articles
+    // showing saved articles from newest saved to oldest
     useEffect(() => {
-        mainApi.getSavedArticles(currentUser._id)
+        mainApi.getSavedArticles()
             .then((res) => {
-                setSavedCards(res);
+                setSavedCards(res.data.reverse());
             })
-    }, [currentUser._id])
+            .catch((e) => console.log(e));
+    }, [])
+
+    // deleting saved article
+    function handleDeleteArticle(id) {
+        mainApi.deleteSavedArticle(id)
+            .then(() => {
+                const newList = savedCards.filter(((card) => card._id !== id));
+                setSavedCards(newList);
+            })
+            .catch((e) => console.log(e));
+    }
 
     // logging out
     function handleSignOut() {
@@ -171,8 +185,10 @@ function App() {
                     <Switch>
                         <Route exact path='/saved-news'>
                             <SavedNews
+                                savedCards={savedCards}
                                 isLoggedIn={isLoggedIn}
                                 isNavMobileOpen={isNavMobileOpen}
+                                handleDeleteArticle={handleDeleteArticle}
                                 handleSignOut={handleSignOut}
                                 onClose={closeNavMobile}
                                 onOpen={handleNavMobileOpen}
@@ -198,7 +214,7 @@ function App() {
                                 isNothingFoundOpen={isNothingFoundOpen}
                                 isPreloaderOpen={isPreloaderOpen}
                                 searchCards={searchCards}
-                                onSave={handleSaveArticle}
+                                handleSaveArticle={handleSaveArticle}
                                 page='main'
                             />
                         </Route>
