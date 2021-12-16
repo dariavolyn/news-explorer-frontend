@@ -11,6 +11,7 @@ import SavedNews from '../SavedNews/SavedNews.js';
 import SuccessPopup from '../SuccessPopup/SuccessPopup.js';
 import newsApi from '../../utils/NewsApi.js';
 import mainApi from '../../utils/MainApi.js';
+import { ProtectedRoute } from '../../utils/ProtectedRoute.js';
 
 
 function App() {
@@ -32,7 +33,7 @@ function App() {
 
     // global state for close on Esc
     useEffect(() => {
-        const close = (e) => { if (e.keyCode === 27) { closeAllPopups(); } }
+        const close = (e) => { if (e.key === 'Escape') { closeAllPopups(); } }
         window.addEventListener('keydown', close)
         return () => window.removeEventListener('keydown', close)
     })
@@ -139,26 +140,21 @@ function App() {
     function handleSaveArticle(card) {
         mainApi.saveArticle(card)
             .then((res) => {
-                savedCards.push(res);
-                setSavedCards(res.data);
+                setSavedCards(arr => [...arr, res]);
             })
             .catch((e) => console.log(e))
-
-            mainApi.getSavedArticles()
-            .then((res) => {
-                setSavedCards(res.data.reverse());
-            })
-            .catch((e) => console.log(e));
     }
 
     // showing saved articles from newest saved to oldest
     useEffect(() => {
-        mainApi.getSavedArticles()
-            .then((res) => {
-                setSavedCards(res.data.reverse());
-            })
-            .catch((e) => console.log(e));
-    }, [])
+        if (isLoggedIn) {
+            mainApi.getSavedArticles()
+                .then((res) => {
+                    setSavedCards(res.data.reverse());
+                })
+                .catch((e) => console.log(e));
+        } else { return }
+    }, [isLoggedIn])
 
     // deleting saved article
     function handleDeleteArticle(id) {
@@ -179,78 +175,77 @@ function App() {
     }
 
     return (
-        <>
-            <CurrentUserContext.Provider value={currentUser}>
-                <div className='app'>
-                    <Switch>
-                        <Route exact path='/saved-news'>
-                            <SavedNews
-                                savedCards={savedCards}
-                                isLoggedIn={isLoggedIn}
-                                isNavMobileOpen={isNavMobileOpen}
-                                handleDeleteArticle={handleDeleteArticle}
-                                handleSignOut={handleSignOut}
-                                onClose={closeNavMobile}
-                                onOpen={handleNavMobileOpen}
-                                page='saved-news'
-                            />
-                        </Route>
-                        <Route path='/'>
-                            <Header
-                                closeNavMobile={closeNavMobile}
-                                isLoggedIn={isLoggedIn}
-                                isNavMobileOpen={isNavMobileOpen}
-                                handleRegisterOpen={handleRegisterOpen}
-                                handleSignOut={handleSignOut}
-                                onAuth={handleAuthOpen}
-                                onClose={closeAllPopups}
-                                onOpen={handleNavMobileOpen}
-                                page='main'
-                            />
-                            <Main
-                                cards={cards.articles}
-                                keyword={keyword}
-                                isLoggedIn={isLoggedIn}
-                                isNothingFoundOpen={isNothingFoundOpen}
-                                isPreloaderOpen={isPreloaderOpen}
-                                searchCards={searchCards}
-                                handleSaveArticle={handleSaveArticle}
-                                page='main'
-                            />
-                        </Route>
-                    </Switch>
+        <CurrentUserContext.Provider value={currentUser}>
+            <div className='app'>
+                <Switch>
+                    <ProtectedRoute exact path='/saved-news'
+                        component={SavedNews}
+                        savedCards={savedCards}
+                        isLoggedIn={isLoggedIn}
+                        isNavMobileOpen={isNavMobileOpen}
+                        handleDeleteArticle={handleDeleteArticle}
+                        handleSignOut={handleSignOut}
+                        closeNavMobile={closeNavMobile}
+                        onOpen={handleNavMobileOpen}
+                        setSavedCards={setSavedCards}
+                        page='saved-news'>
+                    </ProtectedRoute>
 
-                    <Route path='/signin'>
-                        <Authentication
-                            altFormTitle='Sign up'
-                            altFormLink='/signup'
-                            openAltForm={handleRegisterOpen}
-                            isOpen={isAuthOpen}
-                            formSubmit={handleAuth}
+                    <Route path='/'>
+                        <Header
+                            closeNavMobile={closeNavMobile}
+                            isLoggedIn={isLoggedIn}
+                            isNavMobileOpen={isNavMobileOpen}
+                            handleRegisterOpen={handleRegisterOpen}
+                            handleSignOut={handleSignOut}
+                            onAuth={handleAuthOpen}
                             onClose={closeAllPopups}
+                            onOpen={handleNavMobileOpen}
+                            page='main'
+                        />
+                        <Main
+                            cards={cards.articles}
+                            keyword={keyword}
+                            isLoggedIn={isLoggedIn}
+                            isNothingFoundOpen={isNothingFoundOpen}
+                            isPreloaderOpen={isPreloaderOpen}
+                            searchCards={searchCards}
+                            handleSaveArticle={handleSaveArticle}
+                            page='main'
                         />
                     </Route>
-                    <Route path='/signup'>
-                        <Register
-                            altFormTitle='Sign in'
-                            altFormLink='/signin'
-                            openAltForm={handleAuthOpen}
-                            isOpen={isRegisterOpen}
-                            formSubmit={handleRegister}
-                            onClose={closeAllPopups}
+                </Switch>
 
-                        />
-                    </Route>
-
-                    <SuccessPopup
-                        isOpen={isSuccessPopupOpen}
-                        openAuth={handleAuthOpen}
+                <Route path='/signin'>
+                    <Authentication
+                        altFormTitle='Sign up'
+                        altFormLink='/signup'
+                        openAltForm={handleRegisterOpen}
+                        isOpen={isAuthOpen}
+                        formSubmit={handleAuth}
                         onClose={closeAllPopups}
                     />
-                    <Footer />
-                </div>
-            </CurrentUserContext.Provider>
-        </>
+                </Route>
+                <Route path='/signup'>
+                    <Register
+                        altFormTitle='Sign in'
+                        altFormLink='/signin'
+                        openAltForm={handleAuthOpen}
+                        isOpen={isRegisterOpen}
+                        formSubmit={handleRegister}
+                        onClose={closeAllPopups}
+
+                    />
+                </Route>
+
+                <SuccessPopup
+                    isOpen={isSuccessPopupOpen}
+                    openAuth={handleAuthOpen}
+                    onClose={closeAllPopups}
+                />
+                <Footer />
+            </div>
+        </CurrentUserContext.Provider>
     )
 }
 

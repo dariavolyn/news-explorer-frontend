@@ -13,7 +13,7 @@ function Navigation(props) {
             ${props.isNavMobileOpen ? 'nav__menu_is_open' : ''}`}>
 
                 <button className={`button nav__close nav__close_page_${props.page}`}
-                    onClick={props.onClose}>+</button>
+                    onClick={props.closeNavMobile}>+</button>
 
                 <NavLink to='/' className={`link nav__home nav__home_page_${props.page}`}
                     exact activeClassName='nav__home_active'>Home</NavLink>

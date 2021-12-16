@@ -18,7 +18,7 @@ function Header(props) {
                     isLoggedIn={props.isLoggedIn}
                     isNavMobileOpen={props.isNavMobileOpen}
                     onAuth={props.onAuth}
-                    onClose={props.closeNavMobile}
+                    closeNavMobile={props.closeNavMobile}
                     page={props.page}
                     signOut={props.handleSignOut}
                 />
