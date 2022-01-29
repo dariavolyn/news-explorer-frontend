@@ -64,7 +64,7 @@ function Authentication(props) {
                 type='text'
                 value={password}
             />
-            <span className={`popup__error ${!props.isLoginSuccess && email!== '' && password !=='' && 'popup__error_visible'}`}>Incorrect email or password</span>
+            <span className={`popup__error ${props.isLoginFail && 'popup__error_visible'}`}>Incorrect email or password</span>
         </PopupWithForm>
     )
 }

@@ -23,6 +23,7 @@ function App() {
 
     const [isAuthOpen, setAuthOpen] = useState(false);
     const [isLoggedIn, setLoggedIn] = useState(false);
+    const [isLoginFail, setIsLoginFail] = useState(false);
     const [isRegisterOpen, setRegisterOpen] = useState(false);
     const [isNavMobileOpen, setNavMobileOpen] = useState(false);
     const [isNothingFoundOpen, setIsNothingFoundOpen] = useState(false);
@@ -86,6 +87,7 @@ function App() {
         setSuccessPopupOpen(false);
         setRegisterOpen(false);
         setAuthOpen(false);
+        setIsLoginFail(false);
         history.push('/');
     }
 
@@ -93,7 +95,7 @@ function App() {
         setNavMobileOpen(false);
     }
 
-    // user forms submit
+    // user auth
     function handleAuth(email, password) {
         mainApi.authorizeUser(email, password)
             .then((res) => {
@@ -102,9 +104,13 @@ function App() {
                 setCurrentUser({ username: res.user })
                 history.push('/saved-news');
             })
-            .catch((e) => { console.log(e) });
+            .catch((e) => { 
+                setIsLoginFail(true);
+                console.log(e) 
+            });
     }
 
+    // user register
     function handleRegister(email, password, username) {
         mainApi.registerUser(email, password, username)
             .then(() => {
@@ -138,11 +144,18 @@ function App() {
 
     // saving an article 
     function handleSaveArticle(card) {
-        mainApi.saveArticle(card)
+        if (isLoggedIn) {
+            mainApi.saveArticle(card)
             .then((res) => {
                 setSavedCards(arr => [...arr, res]);
+                console.log(savedCards)
             })
             .catch((e) => console.log(e))
+        } else {
+            history.push('/signin');
+            handleAuthOpen();
+        }
+        
     }
 
     // showing saved articles from newest saved to oldest
@@ -222,6 +235,8 @@ function App() {
                         altFormLink='/signup'
                         openAltForm={handleRegisterOpen}
                         isOpen={isAuthOpen}
+                        isLoginFail={isLoginFail}
+                        setLoggedIn={setLoggedIn}
                         formSubmit={handleAuth}
                         onClose={closeAllPopups}
                     />

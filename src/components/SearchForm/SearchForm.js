@@ -8,7 +8,7 @@ function SearchForm(props) {
     }
 
     return (
-        <form className='search-form'>
+        <form className='search-form' onSubmit={onSubmit}>
             <input
                 className='search-form__bar'
                 type='text'
@@ -16,7 +16,7 @@ function SearchForm(props) {
                 placeholder='Enter topic'
                 onChange={props.onChange}
                 value={props.search} />
-            <button className='button search-form__submit' type='submit' value='Search' onClick={onSubmit}>Search</button>
+            <button className='button search-form__submit' type='submit' value='Search'>Search</button>
         </form>
     )
 }

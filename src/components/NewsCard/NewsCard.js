@@ -14,10 +14,12 @@ function NewsCard(props) {
         window.open(props.link);
     }
 
+    function onDelete() {
+        props.handleDeleteArticle(props.id);
+    }
+
     function onSave() {
-        if (isCardSaved === true) {
-            setCardSaved(false);
-        } else {
+        if (isCardSaved === false && props.isLoggedIn) {
             setCardSaved(true);
             props.handleSaveArticle({
                 link: props.link,
@@ -28,14 +30,13 @@ function NewsCard(props) {
                 source: props.source,
                 keyword: props.keyword,
                 owner: props.owner,
+                id: props.id,
             })
-
+        } else {
+            setCardSaved(false);
         }
     }
 
-    function onDelete() {
-        props.handleDeleteArticle(props.id);
-    }
 
     return (
         <li className='news-card'>
@@ -61,8 +62,7 @@ function NewsCard(props) {
 
             {props.page === 'main' &&
                 <button
-                    disabled={props.isLoggedIn === false && true}
-                    onClick={onSave}
+                    onClick={isCardSaved ? onDelete : onSave}
                     className={`button news-card__button news-card__save ${isCardSaved ? 'news-card__saved' : ''}`}>
                     <div className='news-card__tooltip-wrap tooltip-wrap_type_save'>
                         {props.isLoggedIn === false && <div className='news-card__tooltip'>

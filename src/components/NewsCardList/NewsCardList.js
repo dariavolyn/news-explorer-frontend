@@ -25,8 +25,6 @@ function NewsCardList(props) {
                         text={card.content}
                         title={card.title}
                         owner={currentUser._id}
-                        savedCards={props.savedCards}
-                        setSavedCards={props.setSavedCards}
                     />))}
             </ul>}
 
@@ -37,25 +35,25 @@ function NewsCardList(props) {
                     onClick={props.showMore}>Show more</button>}
 
             {props.savedCards && props.page === 'saved-news' && <ul className='news-list__cards'>
-                    {props.savedCards.map((card, index) => (
-                        <NewsCard
-                            id={card._id}
-                            key={index}
-                            date={card.date}
-                            image={card.image}
-                            isLoggedIn={props.isLoggedIn}
-                            keyword={card.keyword}
-                            link={card.url}
-                            page={props.page}
-                            source={card.source}
-                            onSave={props.onSave}
-                            text={card.text}
-                            title={card.title}
-                            owner={currentUser._id}
-                            setSavedCards={props.setSavedCards}
-                            handleDeleteArticle={props.handleDeleteArticle}
-                        />))}
-                </ul>}
+                {props.savedCards.map((card, index) => (
+                    <NewsCard
+                        id={card._id}
+                        key={index}
+                        date={card.date}
+                        image={card.image}
+                        isLoggedIn={props.isLoggedIn}
+                        keyword={card.keyword}
+                        link={card.url}
+                        page={props.page}
+                        source={card.source}
+                        onSave={props.onSave}
+                        text={card.text}
+                        title={card.title}
+                        owner={currentUser._id}
+                        setSavedCards={props.setSavedCards}
+                        handleDeleteArticle={props.handleDeleteArticle}
+                    />))}
+            </ul>}
         </section>
     )
 }
