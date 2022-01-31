@@ -115,7 +115,7 @@ class MainApi {
 const mainApi = new MainApi({
     baseUrl:
         process.env.NODE_ENV === "production"
-            ? "https://api.daria-news.students.nomoreparties.sbs"
+            ? "https://api.instance.one.students.nomoreparties.sbs"
             : "http://localhost:3000",
 })
 
