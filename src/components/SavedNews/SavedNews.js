@@ -1,22 +1,29 @@
 import React from 'react';
 import NewsCardList from '../NewsCardList/NewsCardList';
-import Header from '../Header/Header.js'
+import Header from '../Header/Header.js';
 import SavedNewsHeader from '../SavedNewsHeader/SavedNewsHeader';
 
 function SavedNews(props) {
+
     return (
         <div className='saved-news'>
-            <Header 
-            page={props.page}
-            user='Elise' 
-            isNavMobileOpen={props.isNavMobileOpen}
-            onOpen={props.onOpen}
-            onClose={props.onClose}
+            <Header
+                isLoggedIn={props.isLoggedIn}
+                isNavMobileOpen={props.isNavMobileOpen}
+                closeNavMobile={props.closeNavMobile}
+                onOpen={props.onOpen}
+                page={props.page}
+                handleSignOut={props.handleSignOut}
             />
 
-            <SavedNewsHeader />
+            <SavedNewsHeader savedCards={props.savedCards}/>
 
-            <NewsCardList page={props.page} />
+            <NewsCardList
+                handleDeleteArticle={props.handleDeleteArticle}
+                savedCards={props.savedCards}
+                page={props.page}
+            />
+
         </div >
     )
 }
